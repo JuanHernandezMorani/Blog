@@ -1,0 +1,68 @@
+{
+    "title":"Post Example",
+    "coverImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPFjlLQscjGBEFJm2nvByQu_-vOs3TjDcnQA&s",
+    "collaborators": ["Colaborator 1","Colaborator 2"],
+    "status": "published",
+    "sections": [
+        {
+           "subtitle": "Example section 1",
+           "order": 1,
+           "contents": [
+            {
+                "type": "paragraph",
+                "data": "a distinct section of a piece of writing, usually dealing with a single theme and indicated by a new line, indentation, or numbering.",
+                "order": 1,
+                "isSubtitle": true
+            },
+            {
+                "type": "paragraph",
+                "data": "a distinct section of a piece of writing, usually dealing with a single theme and indicated by a new line, indentation, or numbering.",
+                "order": 2,
+                "isSubtitle": false
+            },
+            {
+                "type": "list",
+                "data": ["component 1","component 2","component 3","component 4"],
+                "order": 3,
+                "isSubtitle": false
+            },
+            {
+                "type": "image",
+                "data": "https://png.pngtree.com/png-vector/20210221/ourmid/pngtree-error-404-not-found-neon-effect-png-image_2928214.jpg",
+                "order": 4,
+                "isSubtitle": false
+            }
+           ] 
+        },
+        {
+            "subtitle": "Example section 2",
+            "order": 2,
+            "contents": [
+             {
+                 "type": "paragraph",
+                 "data": "a distinct section of a piece of writing, usually dealing with a single theme and indicated by a new line, indentation, or numbering.",
+                 "order": 1,
+                 "isSubtitle": true
+             },
+             {
+                 "type": "paragraph",
+                 "data": "a distinct section of a piece of writing, usually dealing with a single theme and indicated by a new line, indentation, or numbering.",
+                 "order": 2,
+                 "isSubtitle": false
+             },
+             {
+                 "type": "list",
+                 "data": ["component 1","component 2","component 3","component 4"],
+                 "order": 3,
+                 "isSubtitle": false
+             },
+             {
+                 "type": "image",
+                 "data": "https://png.pngtree.com/png-vector/20210221/ourmid/pngtree-error-404-not-found-neon-effect-png-image_2928214.jpg",
+                 "order": 4,
+                 "isSubtitle": false
+             }
+            ] 
+         }
+    ]
+}

@@ -72,7 +72,7 @@ const getPostsData = async () => {
             });
             await Content.create({
                 type: 'list',
-                data: ['Hojas de Google (puedes utilizar nuestra plantilla de calendario)','Calendario editorial de WordPress'],
+                data: JSON.stringify(['Hojas de Google (puedes utilizar nuestra plantilla de calendario)','Calendario editorial de WordPress']),
                 order: 3,
                 sectionId: exampleSection2.id,
             });
@@ -84,7 +84,7 @@ const getPostsData = async () => {
             });
             await Content.create({
                 type: 'list',
-                data: ['Trello (viene con una plantilla)','Noción (viene con una plantilla)','Asana (viene con una plantilla)'],
+                data: JSON.stringify(['Trello (viene con una plantilla)','Noción (viene con una plantilla)','Asana (viene con una plantilla)']),
                 order: 5,
                 sectionId: exampleSection2.id,
             });

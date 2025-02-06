@@ -1,12 +1,26 @@
 const { Router } = require("express");
 const { Post, Section, Content } = require("../db.js");
 const { getPostsData } = require("../middleware/PostMiddleware.js");
+const { conn } = require('../db.js');
 const dotenv = require('dotenv');
-dotenv.config({ path: '../../.env'})
+dotenv.config({ path: '../../.env'});
 
 const node_env = process.env.NODE_ENV;
 
 const app = Router();
+
+function parseJSONFields(data, fields) {
+    fields.forEach(field => {
+        if (typeof data[field] === 'string' && /^[\[{]/.test(data[field])) {
+            try {
+                data[field] = JSON.parse(data[field]);
+            } catch (error) {
+                console.warn(`No se pudo parsear el campo "${field}":`, error);
+            }
+        }
+    });
+    return data;
+}
 
 app.get('/', async (req, res) => {
     try {
@@ -15,7 +29,9 @@ app.get('/', async (req, res) => {
             await getPostsData();
         }
 
-        const allPosts = await Post.findAll();
+        let allPosts = await Post.findAll();
+
+        allPosts = allPosts.map(post => parseJSONFields(post.toJSON(), ['collaborators']));
 
         return res.status(200).json(allPosts);
     } catch (error) {
@@ -24,47 +40,55 @@ app.get('/', async (req, res) => {
     }
 });
 
-app.get('/:id', async (req, res)=>{
-    const { id } = req.params
+app.get('/:id', async (req, res) => {
+    const { id } = req.params;
     try {
         let post = await Post.findOne({
-            where: {id: id},
+            where: { id: id },
             include: [
-             {
-                 model: Section,
-                 as: 'sections',
-                 include: [
-                     {
-                         model: Content,
-                         as: 'contents'
-                     }
-                 ]
-             }
-         ],
-         order: [
-             ['id', 'ASC'],
-             [{ model: Section, as: 'sections' }, 'order', 'ASC'],
-             [{ model: Section, as: 'sections' }, { model: Content, as: 'contents' }, 'order', 'ASC']
-         ]
-        })
-         if(post){
-            res.status(200).send(post)
-         } else {
-            res.status(404).send(`Error 404: Cant found post with id: ${id}`)
-         }
-    }
-    catch (error) {
+                {
+                    model: Section,
+                    as: 'sections',
+                    include: [
+                        {
+                            model: Content,
+                            as: 'contents'
+                        }
+                    ]
+                }
+            ],
+            order: [
+                ['id', 'ASC'],
+                [{ model: Section, as: 'sections' }, 'order', 'ASC'],
+                [{ model: Section, as: 'sections' }, { model: Content, as: 'contents' }, 'order', 'ASC']
+            ]
+        });
+
+        if (post) {
+            post = parseJSONFields(post.toJSON(), ['collaborators']);
+
+            post.sections.forEach(section => {
+                section.contents.forEach(content => {
+                    parseJSONFields(content, ['data']);
+                });
+            });
+
+            return res.status(200).send(post);
+        } else {
+            return res.status(404).send(`Error 404: Can't find post with id: ${id}`);
+        }
+    } catch (error) {
         console.error(`Error al obtener el post: ${id}, error: `, error);
         return res.status(500).json({ message: "Error interno del servidor" });
     }
-    
 });
 
 app.put('/:id', async (req, res) => {
-    const t = await sequelize.transaction();
+    const t = await conn.transaction();
     try {
         const { id } = req.params;
         const { title, coverImage, backgroundColor, collaborators, status, sections } = req.body;
+        var coSrc = Array.isArray(collaborators) ? JSON.stringify(collaborators) : collaborators;
 
         let post = await Post.findOne({
             where: { id },
@@ -91,7 +115,7 @@ app.put('/:id', async (req, res) => {
             return res.status(404).send(`Error 404: Can't find post with id: ${id}`);
         }
 
-        await post.update({ title, coverImage, backgroundColor, collaborators, status }, { transaction: t });
+        await post.update({ title, coverImage, backgroundColor, coSrc, status }, { transaction: t });
 
         const existingSectionIds = post.sections.map(s => s.id);
         const updatedSectionIds = sections.map(s => s.id).filter(id => id !== undefined);
@@ -129,7 +153,7 @@ app.put('/:id', async (req, res) => {
                     await Content.update(
                         {
                             type: content.type,
-                            data: content.data,
+                            data: Array.isArray(content.data) ? JSON.stringify(content.data) : content.data,
                             order: content.order
                         },
                         { where: { id: content.id }, transaction: t }
@@ -139,7 +163,7 @@ app.put('/:id', async (req, res) => {
                     await Content.create(
                         {
                             type: content.type,
-                            data: content.data,
+                            data: Array.isArray(content.data) ? JSON.stringify(content.data) : content.data,
                             order: content.order,
                             sectionId: updatedSection.id
                         },
@@ -160,16 +184,17 @@ app.put('/:id', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-    const t = await sequelize.transaction();
+    const t = await conn.transaction();
     try {
         const { title, coverImage, backgroundColor, collaborators, status, sections } = req.body;
+        const collaboratorsData = Array.isArray(collaborators) ? JSON.stringify(collaborators) : collaborators;
 
         if (!title || !coverImage || !sections || !Array.isArray(sections)) {
             return res.status(400).json({ message: "Faltan datos obligatorios" });
         }
 
         const newPost = await Post.create(
-            { title, coverImage, backgroundColor, collaborators, status },
+            { title, coverImage, backgroundColor, collaborators: collaboratorsData, status },
             { transaction: t }
         );
 
@@ -187,8 +212,9 @@ app.post('/', async (req, res) => {
                 await Content.create(
                     {
                         type: content.type,
-                        data: content.data,
+                        data: Array.isArray(content.data) ? JSON.stringify(content.data) : content.data,
                         order: content.order,
+                        isSubtitle: content.isSubtitle,
                         sectionId: newSection.id
                     },
                     { transaction: t }

@@ -1,0 +1,151 @@
+.detail-pag {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 1.976vw 0;
+    flex: 1 1 0%;
+    height: 100%;
+    margin: 0px auto;
+}
+
+.post-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 0;
+    text-align: left;
+    padding: 1vw 20vw;
+}
+
+.head-detail {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.head-detail img {
+    width: 12vw;
+    margin: 0 2vw;
+}
+
+.detail-title {
+    margin: 1vw 2vw;
+    max-width: 32vw;
+    line-height: 1.35;
+    font-size: 2.5vw;
+    font-weight: 900;
+    font-family: 'Geologica', sans-serif;
+}
+
+.detail-colab {
+    position: relative;
+    right: 19.225vw;
+}
+
+.table ul {
+    list-style: none;
+}
+
+.section-link {
+    text-decoration: none;
+    color: #9fa2ad;
+    font-size: 0.9vw;
+    transition: color 0.1s ease-in-out;
+    font-family: obviously, sans-serif;
+}
+
+.section-link:active,
+.section-link:hover {
+    text-decoration: none;
+    color: #3c3f45;
+}
+
+.section-title {
+    font-size: 42px;
+    font-weight: 700;
+    max-width: 660px;
+    line-height: 50px;
+    scroll-margin-top: 80px;
+    font-family: 'Geologica', sans-serif;
+}
+
+.content-block {
+    font-size: 1.15vw;
+    margin-top: 1vw;
+    max-width: 35vw;
+}
+
+.content-subtitle {
+    font-size: 32px;
+    line-height: 38px;
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    scroll-margin-top: 80px;
+    font-family: 'Geologica', sans-serif;
+}
+
+.content-text{
+    font-family: obviously, sans-serif;
+}
+
+.content-list{
+    list-style-type: disc;
+    margin: 10px 0px 0px;
+    overflow: break-word;
+    word-break: break-word;
+    font-size: 1.15vw;
+    font-weight: 350;
+    font-family: obviously, sans-serif;
+}
+
+.content-block img {
+    border-style: groove;
+    border: 1px solid rgb(209, 212, 219);
+    border-radius: 10px;
+    max-width: 25svw;
+    height: auto;
+    margin-top: 1vw;
+    margin-bottom: 2vw;
+}
+
+.detail-container,
+.suscribe-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    margin: 0 1.54vw;
+    padding: 0 0.54vw;
+    text-align: left;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-weight: 500;
+    max-width: 303.2px;
+    margin-right: 40px;
+    margin-top: 22px;
+    line-height: 1.33vw;
+}
+
+.table h3 {
+    font-size: 1.2vw;
+    padding-left: 2.4vw;
+    padding-bottom: 16px;
+    font-family: 'Geologica', sans-serif;
+}
+
+.suscribe-form img{
+    border-style: solid;
+    border-radius: 10%;
+    border-color: #421983;
+    border-width: 3vw;
+}

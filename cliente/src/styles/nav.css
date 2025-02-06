@@ -1,0 +1,77 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly !important;
+    background-color: white;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .nav-logo a {
+    text-decoration: none;
+    color: inherit;
+    margin-right: 0.5vw;
+  }
+
+  .sp1,
+  .sp2 {
+    font-weight: 600;
+    font-size: 0.832vw;
+    font-family: obviously, sans-serif;
+  }
+  
+  .sp1:hover,
+  .sp2,
+  .nav-item a:hover {
+    color: #ff5733 !important;
+  }
+
+  .nav-item a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .nav-logo img {
+    max-width: 3.12vw;
+    max-height: auto;
+  }
+  
+  .nav-item {
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.832vw;
+    font-family: obviously, sans-serif;
+  }
+  
+  .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    list-style: none;
+    margin: 0;
+  }
+  
+  .dropdown-menu li {
+    padding: 10px 20px;
+    white-space: nowrap;
+    text-decoration: none;
+    color:initial;
+  }
+
+  .dp-m-a {
+    text-decoration: none;
+    color: initial;
+  }
+  
+  .dropdown-menu li:hover {
+    background-color: #f0f0f0;
+  }

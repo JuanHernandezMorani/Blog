@@ -15,10 +15,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    origin: {
-      type: DataTypes.TEXT,
-      defaultValue: null,
-    },
     backgroundColor: {
       type: DataTypes.STRING,
       defaultValue: '#FFFFFF',
