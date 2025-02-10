@@ -1,32 +1,29 @@
 .home-container {
-    height: 75vh;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  height: 89vh;
+  align-items: start;
+  text-align: center;
+  justify-content: center;
+  background-color: #f6f6f7;
+}
+  
+.grid-container {
+  display: grid;
+  height: fit-content;
+  width: 68.841vw;
+  padding: 2vw calc(4vw + 65px);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+  
+.grid-item {
+  align-items: center;
+  width: 15.75vw;
+  height: 20.022vw;
+  text-align: start;
 }
 
-.vw-container {
-    margin-top: 20px;
-  }
-  
-  .vw-container h2 {
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-    color: inherit;
-  }
-  
-  .grid-container {
-    display: grid;
-    align-items: center;
-    height: 100%;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 15px;
-  }
-  
-  .grid-item {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+.grid-item a{
+  text-decoration: none;
+  color: inherit;
+}

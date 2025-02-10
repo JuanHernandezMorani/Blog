@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getPostById, clearDetail } from '../actions';
 import '../styles/detail.css';
-import test from '../images/test.png';
+import Newsletter from '../components/suscribeForm.jsx';
 
 function findID(title, posts) {
     const postTitle = title.replace(/-/g, ' ');
@@ -33,24 +33,26 @@ export default function Detail() {
     return (
         <div className="detail-page">
             <header className='post-head' style={{ backgroundColor: details.backgroundColor }}>
-                    <div className='head-detail'>
+                <div className='head-detail'>
                     <h1 className='detail-title'>{details.title}</h1>
                     <img src={details.coverImage} alt={details.title} className='img-fluid'/>
-                    </div>
+                </div>
+                <div className='head-colab'>
                     <span className='detail-colab'>Colaboradores: {Array.isArray(details.collaborators) ? details.collaborators.join(', ') : details.collaborators}</span>
+                </div>
             </header>
             <div className='detail-inner'>
                 <div className='table'>
-                <h3>TABLA DE CONTENIDO</h3>
-                <nav className="detail-content-table">
-                <ul>
+                    <h3>TABLA DE CONTENIDO</h3>
+                    <nav className="detail-content-table">
+                        <ul>
                     {details.sections.map(section => (
                         <li key={section.id}>
                             <a className='section-link' href={`#${section.subtitle}`}>{section.subtitle}</a>
                         </li>
                     ))}
-                </ul>
-                </nav>
+                        </ul>
+                    </nav>
                 </div>
                 <div className='detail-container'>
                 <article className='post-sections'>
@@ -81,7 +83,7 @@ export default function Detail() {
                 </article>
                 </div>
                 <div className='suscribe-form'>
-                    <img src={test} alt='temp-img'/>
+                    <Newsletter />
                 </div>
             </div>
         </div>

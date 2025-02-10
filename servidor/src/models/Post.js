@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
     },
     coverImage: {
       type: DataTypes.STRING,
-      allowNull: true,
+      defaultValue: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPFjlLQscjGBEFJm2nvByQu_-vOs3TjDcnQA&s',
     },
     backgroundColor: {
       type: DataTypes.STRING,
@@ -21,6 +21,7 @@ module.exports = (sequelize) => {
     },
     collaborators: {
       type: DataTypes.STRING,
+      defaultValue: 'Dev',
     },
     publicationDate: {
       type: DataTypes.DATE,

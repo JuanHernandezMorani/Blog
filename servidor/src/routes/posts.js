@@ -189,7 +189,7 @@ app.post('/', async (req, res) => {
         const { title, coverImage, backgroundColor, collaborators, status, sections } = req.body;
         const collaboratorsData = Array.isArray(collaborators) ? JSON.stringify(collaborators) : collaborators;
 
-        if (!title || !coverImage || !sections || !Array.isArray(sections)) {
+        if (!title || !status || !sections || !Array.isArray(sections)) {
             return res.status(400).json({ message: "Faltan datos obligatorios" });
         }
 
