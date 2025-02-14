@@ -15,24 +15,18 @@ import UnderConstruction from '../routes/underConstruction.jsx';
 
 function App() {
   const dispatch = useDispatch();
-  const [charge, setCharge] = useState(false);
+
+  useEffect(() => {   
+    dispatch(getPosts());
+} , [ dispatch ]);
+
   const posts = useSelector(state => state.OriginalPosts);
-
-
-  useEffect(() => {
-      setCharge(true);        
-      dispatch(getPosts());
-      setTimeout(() => {
-          setCharge(false);
-      }, 500);
-  } , [ dispatch ]);
 
   return (
     
     <BrowserRouter>
         <div className="App">
           <Nav />
-          {!charge && posts.length > 0 ? 
               <Routes>
                 <Route exact path="/" element={<Home posts={posts}/>}/>
                 <Route path="/read/:title" element={<Detail />} />
@@ -49,9 +43,6 @@ function App() {
                 </Route>
 
               </Routes>
-            : charge ? <div>LOADING...</div>
-            : <div>No data found</div>
-          }
         </div>
     </BrowserRouter>
   );
