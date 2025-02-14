@@ -19,6 +19,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       defaultValue: '#FFFFFF',
     },
+    fontColor: {
+      type: DataTypes.STRING,
+      defaultValue: '#000000',
+    },
     collaborators: {
       type: DataTypes.STRING,
       defaultValue: 'Dev',

@@ -1,5 +1,6 @@
 import axios from "axios";
 import Swal from 'sweetalert2';
+
 const server = process.env.REACT_APP_SERVER;
 
 export function getPosts(){
@@ -40,19 +41,108 @@ export function getPostById(id){
 }
 
 export function createPost(payload){
-    return async function(){
+    return async function(dispatch){
         try{
             const response = await axios.post(`${server}/posts/`, payload)
-            return response
+            return dispatch({
+                type: "CREATE_POST",
+                payload: response.data
+            });
         }catch(error){
             Swal.fire({
                 icon: 'error',
                 title: 'Error 412',
-                text: error.response.data.message || 'Cant create post',
-                footer: 'Please verify that all required fields have been completed correctly, that the title has not yet been used, and try again.'
+                text: error.response.data.message || 'No se pudo crear el post',
+                footer: 'Porfavor verifica que todos lo campos se hayan completado correctamente, y que el titulo no este siendo utilizado, y vuelve a internarlo.'
             })
         }
     }
+}
+
+export function subscribe(email){
+    return async function (dispatch) {
+        try {
+            const res = await axios.post(`${server}/subscriber/`, {email: email});
+            
+            return dispatch({
+                type: "SUBSCRIBE",
+                payload: res.data
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error 500',
+                text: error.response.data.message || 'Algo salio mal',
+                footer: 'Porfavor vuelva a intentarlo nuevamente mas tarde, o pongase en contacto con soporte.'
+            })
+        }
+    }
+}
+
+export function sendNewsletter(title){
+    return async function (dispatch) {
+        try {
+            const res = await axios.post(`${server}/subscriber/newsletter`, {title: title});
+            return dispatch({
+                type: "SEND_NEWSLETTER",
+                payload: res.data
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error 500',
+                text: error.response.data.message || 'Algo salio mal',
+                footer: 'Porfavor vuelva a intentarlo nuevamente mas tarde, o pongase en contacto con soporte.'
+            })
+        }
+    }
+}
+
+export function unsubscribe(data){
+    return async function (dispatch) {
+        try {
+            const res = await axios.delete(`${server}/subscriber/${data}`);
+            return dispatch({
+                type: "UNSUBSCRIBE",
+                payload: res.data
+            });
+        } catch (error) {
+            console.log(error.response.data.message || 'Algo salio mal')
+        }
+    }
+}
+
+export function uploadImage(file, imageType, index = null) {
+    return async function (dispatch) {
+        try {
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.onloadend = async () => {
+                try {
+                    const response = await axios.post(`${server}/posts/upload`, { image: reader.result }, {
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    dispatch({
+                        type: 'UPLOAD_IMAGE_SUCCESS',
+                        payload: { imageUrl: response.data.imageUrl, imageType, index }
+                    });
+
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al subir la imagen',
+                        text: error.response?.data?.message || 'No se pudo subir la imagen',
+                        footer: 'Verifica el archivo e intenta de nuevo.'
+                    });
+                }
+            };
+        } catch (error) {
+            console.error('Error en la conversión de imagen:', error);
+        }
+    };
 }
 
 export function updatePost(id, updatedPost) {
@@ -102,5 +192,11 @@ export function removePost(id){
 export function clearDetail(){
     return {
         type: "CLEAR_DETAIL"
+    }
+}
+
+export function clearImageSuccess(){
+    return {
+        type: "CLEAR_IMAGE_SUCCESS"
     }
 }

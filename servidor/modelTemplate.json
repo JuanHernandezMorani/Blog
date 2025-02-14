@@ -1,6 +1,8 @@
 {
     "title":"Post Example",
     "coverImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPFjlLQscjGBEFJm2nvByQu_-vOs3TjDcnQA&s",
+    "backgroundColor": "#f4f4f4",
+    "fontColor": "#000000",
     "collaborators": ["Colaborator 1","Colaborator 2"],
     "status": "published",
     "sections": [

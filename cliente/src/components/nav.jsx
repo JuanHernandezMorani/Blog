@@ -12,7 +12,7 @@ export default function Nav() {
         </div>
       <div className="nav-item">
         <a href='/Canales'>Canales</a>
-        <ul className="dropdown-menu">
+        <ul className="nav-ul">
                             <li><a href="/Canales/#no-defined" className="dp-m-a">Búsqueda de Pago</a></li>
                             <li><a href="/Canales/#no-defined" className="dp-m-a">Display</a></li>
                             <li><a href="/Canales/#no-defined" className="dp-m-a">Redes Sociales</a></li>
@@ -23,7 +23,7 @@ export default function Nav() {
       </div>
       <div className="nav-item">
         <a href='/Contenido'>Contenido</a>
-      <ul className="dropdown-menu">
+      <ul className="nav-ul">
                             <li><a href="/Contenido/#no-defined" className="dp-m-a">Estrategia de Contenido</a></li>
                             <li><a href="/Contenido/#no-defined" className="dp-m-a">Creación de Contenido</a></li>
                             <li><a href="/Contenido/#no-defined" className="dp-m-a">Tipos de Contenido</a></li>
@@ -31,7 +31,7 @@ export default function Nav() {
       </div>
       <div className="nav-item">
         <a href='/Marketing'>Marketing</a>
-      <ul className="dropdown-menu">
+      <ul className="nav-ul">
                             <li><a href="/Marketing/#no-defined" className="dp-m-a">Fundamentos de Marketing</a></li>
                             <li><a href="/Marketing/#no-defined" className="dp-m-a">Investigación Competitiva</a></li>
                             <li><a href="/Marketing/#no-defined" className="dp-m-a">Investigación de Mercado</a></li>
@@ -42,7 +42,7 @@ export default function Nav() {
       </div>
       <div className="nav-item">
         <a href='/Noticias-e-Investigacion'>Noticias e Investigación</a>
-      <ul className="dropdown-menu">
+      <ul className="nav-ul">
                             <li><a href="/Noticias-e-Investigacion/#no-defined" className="dp-m-a">Noticias del Sector</a></li>
                             <li><a href="/Noticias-e-Investigacion/#no-defined" className="dp-m-a">Investigación Original</a></li>
                             <li><a href="/Noticias-e-Investigacion/#no-defined" className="dp-m-a">Casos de Estudio</a></li>

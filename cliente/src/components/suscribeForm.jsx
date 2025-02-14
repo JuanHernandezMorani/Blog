@@ -1,9 +1,12 @@
 import '../styles/suscribeForm.css';
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { subscribe } from '../actions';
 
 function Newsletter() {
   const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const dispatch = useDispatch();
 
   function handleInput(event) {
     setEmail(event.target.value);
@@ -16,7 +19,7 @@ function Newsletter() {
       setIsEmailValid(false);
     } else {
       setIsEmailValid(true);
-      alert(`Thank you for subscribing with ${email}`);
+      dispatch(subscribe(email));
       setEmail("");
     }
   }

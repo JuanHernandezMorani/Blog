@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { Post, Section, Content } = require("../db.js");
+const { v2: cloudinary } = require('cloudinary');
 const { getPostsData } = require("../middleware/PostMiddleware.js");
 const { conn } = require('../db.js');
 const dotenv = require('dotenv');
@@ -8,6 +9,12 @@ dotenv.config({ path: '../../.env'});
 const node_env = process.env.NODE_ENV;
 
 const app = Router();
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 function parseJSONFields(data, fields) {
     fields.forEach(field => {
@@ -186,7 +193,7 @@ app.put('/:id', async (req, res) => {
 app.post('/', async (req, res) => {
     const t = await conn.transaction();
     try {
-        const { title, coverImage, backgroundColor, collaborators, status, sections } = req.body;
+        const { title, coverImage, backgroundColor, fontColor,collaborators, status, sections } = req.body;
         const collaboratorsData = Array.isArray(collaborators) ? JSON.stringify(collaborators) : collaborators;
 
         if (!title || !status || !sections || !Array.isArray(sections)) {
@@ -194,7 +201,7 @@ app.post('/', async (req, res) => {
         }
 
         const newPost = await Post.create(
-            { title, coverImage, backgroundColor, collaborators: collaboratorsData, status },
+            { title, coverImage, backgroundColor, fontColor,collaborators: collaboratorsData, status },
             { transaction: t }
         );
 
@@ -249,6 +256,26 @@ app.delete('/:id', async (req, res) => {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
     
+});
+
+app.post('/upload', async (req, res) => {
+    try {
+        const { image } = req.body;
+
+        if (!image) {
+            return res.status(400).json({ error: 'No se recibió ninguna imagen' });
+        }
+
+        const uploadResponse = await cloudinary.uploader.upload(image, {
+            folder: 'uploads',
+            resource_type: 'image'
+        });
+
+        res.json({ imageUrl: uploadResponse.secure_url });
+    } catch (error) {
+        console.error('Error al subir imagen a Cloudinary:', error);
+        res.status(500).json({ error: 'Error al subir la imagen' });
+    }
 });
 
 module.exports = app;

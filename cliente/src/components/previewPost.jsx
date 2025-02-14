@@ -3,20 +3,22 @@ import React from 'react';
 import Newsletter from './suscribeForm.jsx';
 import PostCard from './PostCard.jsx';
 
-export default function PreviewPost ({details}) {
+export default function PreviewPost ({ details }) {
     return (
         <div className='previewPost-container'>
             <div className="post-home-preview">
+                <p></p>
+                <p></p>
                 <PostCard data={details} />
             </div>
             <div className="detail-page">
                 <header className='post-head' style={{ backgroundColor: details.backgroundColor }}>
                     <div className='head-detail'>
-                        <h1 className='detail-title'>{details.title}</h1>
+                        <h1 className='detail-title' style={{ color: details.fontColor || '#f4f4f4' }}>{details.title}</h1>
                         <img src={details.coverImage} alt={details.title} className='img-fluid'/>
                     </div>
                     <div className='head-colab'>
-                        <span className='detail-colab'>Colaboradores: {Array.isArray(details.collaborators) ? details.collaborators.join(', ') : details.collaborators}</span>
+                        <span className='detail-colab' style={{ color: details.fontColor || '#f4f4f4' }}>Colaboradores: {Array.isArray(details.collaborators) ? details.collaborators.join(', ') : details.collaborators}</span>
                     </div>
                 </header>
                 <div className='detail-inner'>

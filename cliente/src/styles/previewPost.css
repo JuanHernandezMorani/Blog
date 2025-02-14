@@ -13,6 +13,16 @@
     margin: 0px auto;
 }
 
+.post-home-preview {
+  display: grid;
+  height: fit-content;
+  width: 68.841vw;
+  padding: 2vw calc(4vw + 65px);
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  gap: 5vw;
+}
+
 .post-head {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -45,8 +55,11 @@
 }
 
 .detail-colab {
-    position: relative;
-    right: 19.225vw;
+    text-decoration: none;
+    color: #9fa2ad;
+    font-size: 0.9vw;
+    transition: color 0.1s ease-in-out;
+    font-family: obviously, sans-serif;
 }
 
 .table ul {
@@ -68,10 +81,10 @@
 }
 
 .section-title {
-    font-size: 42px;
+    font-size: 2.2vw;
     font-weight: 700;
     max-width: 660px;
-    line-height: 50px;
+    line-height: 3.019vw;
     scroll-margin-top: 80px;
     font-family: 'Geologica', sans-serif;
 }
@@ -83,12 +96,11 @@
 }
 
 .content-subtitle {
-    font-size: 32px;
-    line-height: 38px;
+    font-size: 3vw;
+    line-height: 3vw;
     font-weight: 700;
-    margin-top: 50px;
-    margin-bottom: 20px;
-    scroll-margin-top: 80px;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
     font-family: 'Geologica', sans-serif;
 }
 
@@ -98,8 +110,8 @@
 
 .content-list{
     list-style-type: disc;
-    margin: 10px 0px 0px;
-    overflow: break-word;
+    margin: 1vw 0vw 0vw;
+    overflow: visible;
     word-break: break-word;
     font-size: 1.15vw;
     font-weight: 350;
@@ -109,8 +121,8 @@
 .content-block img {
     border-style: groove;
     border: 1px solid rgb(209, 212, 219);
-    border-radius: 10px;
-    max-width: 25svw;
+    border-radius: 0.68vw;
+    width: 30vw;
     height: auto;
     margin-top: 1vw;
     margin-bottom: 2vw;
@@ -132,9 +144,9 @@
     flex-direction: column;
     text-align: left;
     font-weight: 500;
-    max-width: 303.2px;
-    margin-right: 40px;
-    margin-top: 22px;
+    max-width: 303.017vw;
+    margin-right: 2.029vw;
+    margin-top: 1.55vw;
     line-height: 1.33vw;
 }
 

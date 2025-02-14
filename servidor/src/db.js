@@ -50,7 +50,10 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Post, Section, Content } = sequelize.models;
+const { Post, Section, Content, Subscriber } = sequelize.models;
+
+Subscriber.belongsToMany(Post, {through: 'SuscribedPost'});
+Post.belongsToMany(Subscriber, {through: 'SuscribedPost'});
 
 Post.hasMany(Section, { as: 'sections', foreignKey: 'postId' });
 Section.belongsTo(Post, { foreignKey: 'postId' });

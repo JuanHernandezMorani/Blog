@@ -1,0 +1,66 @@
+.error-container {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.container {
+    margin-top: 1vw;
+}
+  
+  @keyframes rainbow-animation {
+      to {
+          background-position: 4500vh;
+      }
+  }
+  .error-h1 {
+    font-size: 2.125vw;
+    font-style: italic;
+    font-weight: bold;
+    background-image: linear-gradient(to right, #ff0000, #ff9800, #ffd207, #ffe923,#f9fd00,#ffe923,#ffd207,#ff9800, #f44336);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow-animation 270s linear infinite;
+}
+
+  @keyframes colorCycle {
+    0% {
+      fill: #0000ff;
+    }
+    25% {
+      fill: #00bcd4;
+    }
+    50% {
+      fill: #009688;
+    }
+    75% {
+      fill: #3f51b5;
+    }
+    100% {
+      fill: #2196f3;
+    }
+  }
+
+svg {
+    position: relative;
+    top: 14vw;
+    left: 10vw;
+    transform: scale(5);
+    transform-origin: center;
+}
+
+svg circle {
+  animation: colorCycle 10s infinite alternate;
+}
+
+@media (max-width: 767px) {
+  svg {
+    position: relative;
+    top: 10vw;
+    left: 4.7vw;
+    transform: scale(2.5);
+    transform-origin: center;
+}
+}

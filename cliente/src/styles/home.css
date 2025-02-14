@@ -1,5 +1,6 @@
 .home-container {
   display: flex;
+  width: 100%;
   height: 89vh;
   align-items: start;
   text-align: center;
@@ -13,7 +14,7 @@
   width: 68.841vw;
   padding: 2vw calc(4vw + 65px);
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+  gap: 5vw;
 }
   
 .grid-item {
@@ -26,4 +27,11 @@
 .grid-item a{
   text-decoration: none;
   color: inherit;
+}
+
+@media (max-width: 1135px) {
+  .grid-container {
+    padding: 2vw calc(4vw + 32.5px);
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

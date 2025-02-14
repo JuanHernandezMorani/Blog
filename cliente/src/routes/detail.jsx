@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { getPostById, clearDetail } from '../actions';
 import '../styles/detail.css';
 import Newsletter from '../components/suscribeForm.jsx';
@@ -34,11 +34,11 @@ export default function Detail() {
         <div className="detail-page">
             <header className='post-head' style={{ backgroundColor: details.backgroundColor }}>
                 <div className='head-detail'>
-                    <h1 className='detail-title'>{details.title}</h1>
+                    <h1 className='detail-title' style={{ color: details.fontColor || '#f4f4f4' }}>{details.title}</h1>
                     <img src={details.coverImage} alt={details.title} className='img-fluid'/>
                 </div>
                 <div className='head-colab'>
-                    <span className='detail-colab'>Colaboradores: {Array.isArray(details.collaborators) ? details.collaborators.join(', ') : details.collaborators}</span>
+                    <span className='detail-colab' style={{ color: details.fontColor || '#f4f4f4' }}>Colaboradores: {Array.isArray(details.collaborators) ? details.collaborators.join(', ') : details.collaborators}</span>
                 </div>
             </header>
             <div className='detail-inner'>

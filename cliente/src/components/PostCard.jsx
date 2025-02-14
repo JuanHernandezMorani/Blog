@@ -6,16 +6,13 @@ const PostCard = ({ data }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="post-card" onClick={() => navigate(`/${data.title.replace(/\s+/g, '-')}`)}>
+    <div className="post-card">
       <div
-        className="post-image"
-        style={{ backgroundColor: data.backgroundColor }}
-      >
+        className="post-image" style={{ backgroundColor: data.backgroundColor }} onClick={() => navigate(`/read/${data.title.replace(/\s+/g, '-')}`)} >
         <img src={data.coverImage} alt={data.title} className="img-fluid"/>
       </div>
-      <div className="post-content">
+      <div className="post-content" onClick={() => navigate(`/read/${data.title.replace(/\s+/g, '-')}`)} >
         <h3 className="post-title">{data.title}</h3>
-        {data.description ? <p className="post-description">{data.description}</p> : <></>}
       </div>
     </div>
   );

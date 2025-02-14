@@ -6,6 +6,7 @@ const getPostsData = async () => {
                 title: "Guía de calendarios de contenidos (+ plantillas gratuitas para crear uno)",
                 coverImage: "https://static.semrush.com/blog/uploads/media/63/66/6366a1ee2489c6454ac725890777071b/create-content-calendar.svg",
                 backgroundColor: "#ffe84d",
+                fontColor: "#000000",
                 collaborators: "Dev",
                 status: "published",
             });
