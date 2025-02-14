@@ -1,5 +1,5 @@
 import '../styles/App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../actions';
 import { Route, BrowserRouter, Routes } from "react-router-dom";

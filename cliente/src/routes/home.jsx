@@ -1,6 +1,8 @@
 import '../styles/home.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
+import { getPosts } from '../actions';
+import { useDispatch } from 'react-redux';
 
 export default function Home ({posts}) {
     const [charge, setCharge] = useState(false);
