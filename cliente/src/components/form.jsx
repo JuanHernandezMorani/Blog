@@ -312,34 +312,16 @@ export default function Form({ postId }) {
         });
     }
 
-    document.querySelectorAll(".input-text-2").forEach(textarea => {
-        const adjustHeight = () => {
-            textarea.style.height = "auto";
-            textarea.style.height = textarea.scrollHeight + "px";
-        };
-    
-        textarea.addEventListener("input", adjustHeight);
-        adjustHeight();
-    });
+    document.querySelectorAll("textarea").forEach(textarea => {
+        if (textarea.id) {
+            const adjustHeight = () => {
+                textarea.style.height = "auto";
+                textarea.style.height = textarea.scrollHeight + "px";
+            };
 
-    document.querySelectorAll(".input-text-3").forEach(textarea => {
-        const adjustHeight = () => {
-            textarea.style.height = "auto";
-            textarea.style.height = textarea.scrollHeight + "px";
-        };
-    
-        textarea.addEventListener("input", adjustHeight);
-        adjustHeight();
-    });
-
-    document.querySelectorAll(".input-text-4").forEach(textarea => {
-        const adjustHeight = () => {
-            textarea.style.height = "auto";
-            textarea.style.height = textarea.scrollHeight + "px";
-        };
-    
-        textarea.addEventListener("input", adjustHeight);
-        adjustHeight();
+            textarea.addEventListener("input", adjustHeight);
+            adjustHeight();
+        }
     });
 
     function handleSubmit(e) {
@@ -419,15 +401,15 @@ export default function Form({ postId }) {
                             <div key={index} className='create-section'>
                                 <div className='inner-section'>
                                     <div>
-                                    <button type="button" onClick={(e) => toggleSection(index,e)} className="toggle-button">
-                                        {openSections[index] ? "▲ Cerrar Sección" : "▼ Abrir Sección"}
-                                    </button>
+                                        <button type="button" onClick={(e) => toggleSection(index, e)} className="toggle-button">
+                                            {openSections[index] ? "▲ Cerrar Sección" : "▼ Abrir Sección"}
+                                        </button>
                                         <button type='button' onClick={() => handleAddContent(index)} className='content-button'>
                                             Agregar contenido
                                         </button>
                                         <input type='number' name='section-order' value={index} onChange={(e) => handleSectionOrderChange(index, e)} min='0' className='order-input' />
                                     </div>
-                                    <textarea type='text' name='subtitle' value={section.subtitle} placeholder='Subtítulo' onChange={(e) => handleSectionChange(index, e)} className='input-text-2' />
+                                    <textarea type='text' name='subtitle' value={section.subtitle} placeholder='Subtítulo' onChange={(e) => handleSectionChange(index, e)} id={'section-' + index} className='input-text-2' />
                                 </div>
                                 {index > 0 && (
                                     <button type='button' onClick={() => handleDeleteSection(index)} className='content-button'>
@@ -440,52 +422,56 @@ export default function Form({ postId }) {
                                         {section.contents.map((content, contentIndex) => (
                                             <div className='content-w-toggle'>
                                                 <div className='inner-content-w-toggle'>
-                                                <button onClick={(e) => toggleContent(index, contentIndex,e)} className='toggle-button'>
-                                                    {openContents[`${index}-${contentIndex}`] ? "▲ Cerrar Contenido" : "▼ Abrir Contenido"}
-                                                </button>
-                                                <button type='button' onClick={() => handleDeleteContent(index, contentIndex)} className='content-button'>Eliminar Contenido</button>
-                                                <div className='content-type-detail'>
-                                                <span>{content.type}</span>
-                                                </div>
+                                                    <button onClick={(e) => toggleContent(index, contentIndex, e)} className='toggle-button'>
+                                                        {openContents[`${index}-${contentIndex}`] ? "▲ Cerrar Contenido" : "▼ Abrir Contenido"}
+                                                    </button>
+                                                    <button type='button' onClick={() => handleDeleteContent(index, contentIndex)} className='content-button'>Eliminar Contenido</button>
+                                                    <div className='content-type-detail'>
+                                                        <span>{content.type}</span>
+                                                    </div>
                                                 </div>
                                                 <div key={contentIndex} className='create-content'>
-                                                {openContents[`${index}-${contentIndex}`] && (
-                                                    <>
-                                                        {content.type === 'paragraph' ? (
-                                                            <textarea type='text' name='data' value={content.data} placeholder='Contenido' onChange={(e) => handleContentChange(index, contentIndex, e)} className='input-text-3' />
-                                                        ) : content.type === 'list' ? (
-                                                            <div className='inner-content-list'>
-                                                                <div className="list-container">
-                                                                    {content.data.map((item, itemIndex) => (
-                                                                        <div key={itemIndex} className="inner-content-list-2">
-                                                                            <textarea
-                                                                                type="text"
-                                                                                value={item}
-                                                                                onChange={(e) => handleListItemChange(index, contentIndex, itemIndex, e)}
-                                                                                placeholder={`Elemento ${itemIndex + 1}`}
-                                                                                className="input-text-4"
-                                                                            />
-                                                                            <input type="number" name="content-order" value={itemIndex} onChange={(e) => handleListOrderChange(index, contentIndex, itemIndex, e)} className="order-input" min="0" />
-                                                                            <button type="button" onClick={() => handleRemoveListItem(index, contentIndex, itemIndex)} className="content-button-2">X</button>
-                                                                        </div>
-                                                                    ))}
+                                                    {openContents[`${index}-${contentIndex}`] && (
+                                                        <>
+                                                            {content.type === 'paragraph' ? (
+                                                                <textarea type='text' name='data' id={content.type + '-' + index + '-' + contentIndex} value={content.data} placeholder='Contenido' onChange={(e) => handleContentChange(index, contentIndex, e)} className='input-text-3' />
+                                                            ) : content.type === 'list' ? (
+                                                                <div className='inner-content-list'>
+                                                                    <div className="list-container">
+                                                                        {content.data.map((item, itemIndex) => (
+                                                                            <div key={itemIndex} className="inner-content-list-2">
+                                                                                <textarea
+                                                                                    type="text"
+                                                                                    value={item}
+                                                                                    onChange={(e) => handleListItemChange(index, contentIndex, itemIndex, e)}
+                                                                                    placeholder={`Elemento ${itemIndex + 1}`}
+                                                                                    id={content.type + '-' + index + '-' + contentIndex}
+                                                                                    className="input-text-4"
+                                                                                />
+                                                                                <input type="number" name="content-order" value={itemIndex} onChange={(e) => handleListOrderChange(index, contentIndex, itemIndex, e)} className="order-input" min="0" />
+                                                                                <button type="button" onClick={() => handleRemoveListItem(index, contentIndex, itemIndex)} className="content-button-2">X</button>
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                    
+                                                                    <div className='list-add-button'>
+                                                                        <button type="button" onClick={() => handleAddListItem(index, contentIndex)}>Agregar elemento</button>
+                                                                    </div>
                                                                 </div>
-                                                                <button type="button" onClick={() => handleAddListItem(index, contentIndex)}>Agregar elemento</button>
+                                                            ) : (
+                                                                <input type='file' accept='image/*' onChange={(e) => handleContentImageUpload(index, contentIndex, e)} className='input-form' />
+                                                            )}
+                                                            <div className='inner-create-content-style'>
+                                                                <select name='type' value={content.type} onChange={(e) => handleContentChange(index, contentIndex, e)} className='creation-select'>
+                                                                    <option value='paragraph'>Párrafo</option>
+                                                                    <option value='list'>Lista</option>
+                                                                    <option value='image'>Imagen</option>
+                                                                </select>
+                                                                <input type='number' name='content-order' value={contentIndex} onChange={(e) => handleContentOrderChange(index, contentIndex, e)} min='0' className='order-input' />
+                                                                {content.type === 'paragraph' && <input type='checkbox' checked={content.isSubtitle} onClick={(e) => handleIsSubtitleChange(index, contentIndex, e)} />}
                                                             </div>
-                                                        ) : (
-                                                            <input type='file' accept='image/*' onChange={(e) => handleContentImageUpload(index, contentIndex, e)} className='input-form' />
-                                                        )}
-                                                        <div className='inner-create-content-style'>
-                                                            <select name='type' value={content.type} onChange={(e) => handleContentChange(index, contentIndex, e)} className='creation-select'>
-                                                                <option value='paragraph'>Párrafo</option>
-                                                                <option value='list'>Lista</option>
-                                                                <option value='image'>Imagen</option>
-                                                            </select>
-                                                            <input type='number' name='content-order' value={contentIndex} onChange={(e) => handleContentOrderChange(index, contentIndex, e)} min='0' className='order-input' />
-                                                            {content.type === 'paragraph' && <input type='checkbox' checked={content.isSubtitle} onClick={(e) => handleIsSubtitleChange(index, contentIndex, e)} />}
-                                                        </div>
-                                                    </>
-                                                )}
+                                                        </>
+                                                    )}
                                                 </div>
                                             </div>
                                         ))}
