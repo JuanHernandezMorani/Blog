@@ -352,7 +352,7 @@ export default function Form({ postId }) {
                         {postToEdit ? <button type='submit' className='create-button'>Guardar Post</button> : <button type='submit' className='create-button'>Crear Post</button>}
                         <div>
                             <h3>Título</h3>
-                            <textarea type="text" value={postData.title} name='title' placeholder='Ingrese titulo...' onChange={handleChange} className='input-form' />
+                            <textarea type="text" value={postData.title} id={postData.title} name='title' placeholder='Ingrese titulo...' onChange={handleChange} className='input-text-2' />
                             {errors.title && <p className='input-errors'>{errors.title}</p>}
                         </div>
                         <div className='form-colors'>
