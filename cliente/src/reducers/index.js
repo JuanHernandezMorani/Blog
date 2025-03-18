@@ -6,6 +6,7 @@ const initialState = {
         coverImage: null,
         contentImages: {}
     },
+    needsUpdate: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -15,11 +16,11 @@ function rootReducer(state = initialState, action) {
         case "GET_POST_BY_ID":
             return { ...state, Details: action.payload };
         case "POST_UPDATED":
-            return { ...state };
+            return { ...state,needsUpdate: true };
         case "CREATE_POST":
-            return { ...state };
+            return { ...state,needsUpdate: true };
         case "REMOVE_POST":
-            return { ...state };
+            return { ...state,needsUpdate: true };
         case "CLEAR_DETAIL":
             return { ...state, Details: null };
         case "UPLOAD_IMAGE_SUCCESS":

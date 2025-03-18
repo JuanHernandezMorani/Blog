@@ -13,7 +13,7 @@ export default function Home ({posts}) {
             if(!posts) dispatch(getPosts());
             setCharge(true);
         }
-    } , [ dispatch ]);
+    } , [ dispatch, charge, posts ]);
 
 
     return (
@@ -25,7 +25,7 @@ export default function Home ({posts}) {
                     </div>
                 ))}
             </div>
-            : charge ? <div>LOADING...</div>
+            : !charge ? <div>LOADING...</div>
             : <div>No data found</div>}
         </div>
     );
